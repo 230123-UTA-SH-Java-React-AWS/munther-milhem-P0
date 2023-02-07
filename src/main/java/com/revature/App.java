@@ -1,25 +1,30 @@
 package com.revature;
-import com.revature.controllers.PokemonController;
+import java.net.InetSocketAddress;
+import com.revature.controllers.EmpController;
 import com.sun.net.httpserver.HttpServer;
 
-import java.io.IOException;
-import java.net.InetSocketAddress;
 
 /**
  * Hello world!
  */
 public final class App {
-    
-    public static void main(String[] args) throws Exception  {
-        System.out.println("Stsrting backend server ");
-        HttpServer server =  HttpServer.create(new InetSocketAddress(8000),0);
-
-        server.createContext("/pokemon", new PokemonController());
-        server.setExecutor(null);
-        server.start();
-
-
-
+    private App() {
     }
 
+    
+    /**
+     * Says hello to the world.
+     * @param args The arguments of the program.
+     */
+    public static void main(String[] args) throws Exception{
+        System.out.println("Starting backend server...");
+
+        HttpServer server = HttpServer.create(new InetSocketAddress(8000), 0);
+
+        server.createContext("/empLogin", new EmpController());
+        //server.createContext("/ManagerLogin", new ManagerController());
+
+        server.setExecutor(null);
+        server.start();
+    }
 }
